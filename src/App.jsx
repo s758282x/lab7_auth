@@ -9,6 +9,9 @@ import LatestEvent from './components/LatestEvent.jsx';
 import { NameProvider } from './context/NameContext.jsx';
 import EmpMgmt from './pages/EmpMgmt.jsx';
 
+import { AuthProvider } from '@asgardeo/auth-react' //added this
+import ProtectedRoute from './components/ProtectedRoute' //added this 
+
 function App() {
   return (
     <NameProvider>
@@ -21,7 +24,16 @@ function App() {
               <Route path="/values" element={<Values />} />
               <Route path="/events" element={<EventsList />} />
               <Route path="/latest-event" element={<LatestEvent />} />
-              <Route path="/emp-mgmt" element={<EmpMgmt />} />
+
+              
+              <Route 
+              path="/emp-mgmt" 
+              element={
+                <ProtectedRoute>
+                <EmpMgmt />
+                </ProtectedRoute>
+                } 
+                />
 
 
             </Routes>

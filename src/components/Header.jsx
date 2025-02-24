@@ -9,9 +9,11 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import MaterialUISwitch from './MaterialUISwitch.jsx';
 import { NameContext } from '../context/NameContext.jsx';
+import { useAuthContext } from '@asgardeo/auth-react';
 
 export default function Header() {
   const { name } = useContext(NameContext);
+  const { state, signIn, signOut } = useAuthContext();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -34,6 +36,12 @@ export default function Header() {
           <Button color="inherit" component={Link} to="/events">Events</Button>
           <Button color="inherit" component={Link} to="/latest-event">Latest Event</Button>
           <Button color="inherit" component={Link} to="/emp-mgmt">Employee Management</Button>
+
+          {state.isAuthenticated ? (
+            <Button color="inherit" onClick={() => signOut()}>Sign Out</Button>
+          ) : (
+            <Button color="inherit" onClick={() => signIn()}>Sign In</Button>
+          )}
 
           <MaterialUISwitch />
         </Toolbar>
