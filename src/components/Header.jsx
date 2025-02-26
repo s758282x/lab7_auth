@@ -11,6 +11,7 @@ import MaterialUISwitch from './MaterialUISwitch.jsx';
 import { NameContext } from '../context/NameContext.jsx';
 import { useAuthContext } from '@asgardeo/auth-react';
 
+
 export default function Header() {
   const { name } = useContext(NameContext);
   const { state, signIn, signOut } = useAuthContext();
@@ -19,15 +20,28 @@ export default function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: '#A76571' }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+        <Box 
+  component={Link} 
+  to="/" 
+  sx={{ 
+    mr: 2, 
+    display: 'flex', 
+    alignItems: 'center', 
+    textDecoration: 'none', 
+    height: '64px', // Match AppBar's default height
+    '& img': {
+      maxHeight: '48px', // Adjust image size to fit neatly
+      width: 'auto'
+    },
+    '&:hover': { filter: 'brightness(0.8)', opacity: 0.8 }
+  }}
+>
+  <img src="/whitelogo.png" alt="Logo" />
+</Box>
+
+
+
+
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Welcome {name || 'Guest'} to CodeCraft Intranet
           </Typography>
